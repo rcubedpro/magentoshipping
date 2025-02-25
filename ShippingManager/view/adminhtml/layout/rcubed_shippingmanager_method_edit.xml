@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Layout file for shipping method edit form.
+ *
+ * @category   RCubed
+ * @package    RCubed_ShippingManager
+ * @author     R-Cubed Solutions <drussell@rcubedpro.com>
+ * @copyright  2025 R-Cubed Solutions (https://www.rcubedpro.com)
+ * @license    https://opensource.org/licenses/OSL-3.0 Open Software License 3.0 (OSL-3.0)
+ * @link       https://www.rcubedpro.com
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="editor"/>
+    <body>
+        <referenceContainer name="content">
+            <block class="RCubed\ShippingManager\Block\Adminhtml\Method\Edit" name="rcubed_shippingmanager_method_edit">
+                <block class="RCubed\ShippingManager\Block\Adminhtml\Method\Edit\Form" name="form"/>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

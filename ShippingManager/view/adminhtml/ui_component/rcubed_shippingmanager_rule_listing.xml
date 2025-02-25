@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * UI component for shipping rules admin grid.
+ *
+ * @category   RCubed
+ * @package    RCubed_ShippingManager
+ * @author     R-Cubed Solutions <drussell@rcubedpro.com>
+ * @copyright  2025 R-Cubed Solutions (https://www.rcubedpro.com)
+ * @license    https://opensource.org/licenses/OSL-3.0 Open Software License 3.0 (OSL-3.0)
+ * @link       https://www.rcubedpro.com
+ */
+-->
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">rcubed_shippingmanager_rule_listing.rcubed_shippingmanager_rule_listing_data_source</item>
+        </item>
+        <item name="buttons" xsi:type="array">
+            <item name="add" xsi:type="array">
+                <item name="name" xsi:type="string">add</item>
+                <item name="label" xsi:type="string" translate="true">Add New Rule</item>
+                <item name="class" xsi:type="string">primary</item>
+                <item name="url" xsi:type="string">*/*/new</item>
+            </item>
+        </item>
+    </argument>
+    <settings>
+        <spinner>rcubed_shippingmanager_rule_columns</spinner>
+        <deps>
+            <dep>rcubed_shippingmanager_rule_listing.rcubed_shippingmanager_rule_listing_data_source</dep>
+        </deps>
+        <buttons>
+            <button name="add">
+                <url path="*/*/new"/>
+                <class>primary</class>
+                <label translate="true">Add New Rule</label>
+            </button>
+        </buttons>
+        <sticky>true</sticky>
+        <cssClass>rcubed-shipping-manager-actions</cssClass>
+    </settings>
+    <dataSource name="rcubed_shippingmanager_rule_listing_data_source" component="Magento_Ui/js/grid/provider">
+        <settings>
+            <storageConfig>
+                <param name="indexField" xsi:type="string">rule_id</param>
+            </storageConfig>
+            <updateUrl path="mui/index/render"/>
+        </settings>
+        <aclResource>RCubed_ShippingManager::shipping_rules</aclResource>
+        <dataProvider class="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider" name="rcubed_shippingmanager_rule_listing_data_source">
+            <settings>
+                <requestFieldName>id</requestFieldName>
+                <primaryFieldName>rule_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <listingToolbar name="listing_top">
+        <settings>
+            <sticky>true</sticky>
+        </settings>
+        <bookmark name="bookmarks"/>
+        <columnsControls name="columns_controls"/>
+        <filterSearch name="fulltext"/>
+        <filters name="listing_filters"/>
+        <paging name="listing_paging"/>
+    </listingToolbar>
+    <columns name="rcubed_shippingmanager_rule_columns">
+        <settings>
+            <editorConfig>
+                <param name="selectProvider" xsi:type="string">rcubed_shippingmanager_rule_listing.rcubed_shippingmanager_rule_listing.rcubed_shippingmanager_rule_columns.ids</param>
+                <param name="enabled" xsi:type="boolean">true</param>
+                <param name="indexField" xsi:type="string">rule_id</param>
+                <param name="clientConfig" xsi:type="array">
+                    <item name="saveUrl" xsi:type="url" path="rcubed_shippingmanager/rule/inlineEdit"/>
+                    <item name="validateBeforeSave" xsi:type="boolean">false</item>
+                </param>
+            </editorConfig>
+            <childDefaults>
+                <param name="fieldAction" xsi:type="array">
+                    <item name="provider" xsi:type="string">rcubed_shippingmanager_rule_listing.rcubed_shippingmanager_rule_listing.rcubed_shippingmanager_rule_columns_editor</item>
+                    <item name="target" xsi:type="string">startEdit</item>
+                    <item name="params" xsi:type="array">
+                        <item name="0" xsi:type="string">${ $.$data.rowIndex }</item>
+                        <item name="1" xsi:type="boolean">true</item>
+                    </item>
+                </param>
+            </childDefaults>
+        </settings>
+        <selectionsColumn name="ids">
+            <settings>
+                <indexField>rule_id</indexField>
+            </settings>
+        </selectionsColumn>
+        <column name="rule_id">
+            <settings>
+                <filter>textRange</filter>
+                <label translate="true">ID</label>
+                <sorting>asc</sorting>
+            </settings>
+        </column>
+        <column name="name">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Name</label>
+            </settings>
+        </column>
+        <column name="is_active" component="Magento_Ui/js/grid/columns/select">
+            <settings>
+                <options>
+                    <option name="0" xsi:type="array">
+                        <item name="value" xsi:type="string">0</item>
+                        <item name="label" xsi:type="string" translate="true">Inactive</item>
+                    </option>
+                    <option name="1" xsi:type="array">
+                        <item name="value" xsi:type="string">1</item>
+                        <item name="label" xsi:type="string" translate="true">Active</item>
+                    </option>
+                </options>
+                <filter>select</filter>
+                <dataType>select</dataType>
+                <label translate="true">Status</label>
+            </settings>
+        </column>
+        <actionsColumn name="actions" class="RCubed\ShippingManager\Ui\Component\Listing\Column\RuleActions">
+            <settings>
+                <indexField>rule_id</indexField>
+                <resizeEnabled>false</resizeEnabled>
+                <resizeDefaultWidth>200</resizeDefaultWidth>
+                <draggable>false</draggable>
+                <visible>true</visible>
+                <label translate="true">Actions</label>
+            </settings>
+        </actionsColumn>
+    </columns>
+</listing>

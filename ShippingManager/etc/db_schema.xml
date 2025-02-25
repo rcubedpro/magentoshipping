@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Database schema for RCubed ShippingManager.
+ *
+ * @category   RCubed
+ * @package    RCubed_ShippingManager
+ * @author     R-Cubed Solutions <drussell@rcubedpro.com>
+ * @copyright  2025 R-Cubed Solutions (https://www.rcubedpro.com)
+ * @license    https://opensource.org/licenses/OSL-3.0 Open Software License 3.0 (OSL-3.0)
+ * @link       https://www.rcubedpro.com
+ */
+-->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="rcubed_shipping_method" resource="default" engine="innodb" comment="RCubed Shipping Method Table">
+        <column xsi:type="int" name="method_id" padding="10" unsigned="true" nullable="false" identity="true" comment="Method ID"/>
+        <column xsi:type="varchar" name="name" nullable="false" length="255" comment="Method Name"/>
+        <column xsi:type="varchar" name="code" nullable="false" length="64" comment="Method Code"/>
+        <column xsi:type="decimal" name="price" scale="4" precision="12" unsigned="false" nullable="true" comment="Method Price"/>
+        <column xsi:type="boolean" name="is_active" nullable="false" default="1" comment="Is Active"/>
+        <column xsi:type="int" name="sort_order" padding="10" unsigned="true" nullable="true" default="0" comment="Sort Order"/>
+        <column xsi:type="varchar" name="title" nullable="true" length="255" comment="Method Title"/>
+        <column xsi:type="text" name="store_ids" nullable="true" comment="Store IDs"/>
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP" comment="Creation Time"/>
+        <column xsi:type="timestamp" name="updated_at" on_update="true" nullable="false" default="CURRENT_TIMESTAMP" comment="Update Time"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="method_id"/>
+        </constraint>
+        <constraint xsi:type="unique" referenceId="RCUBED_SHIPPING_METHOD_CODE">
+            <column name="code"/>
+        </constraint>
+        <index referenceId="RCUBED_SHIPPING_METHOD_NAME" indexType="btree">
+            <column name="name"/>
+        </index>
+        <index referenceId="RCUBED_SHIPPING_METHOD_IS_ACTIVE" indexType="btree">
+            <column name="is_active"/>
+        </index>
+    </table>
+    <table name="rcubed_shipping_rule" resource="default" engine="innodb" comment="RCubed Shipping Rule Table">
+        <column xsi:type="int" name="rule_id" padding="10" unsigned="true" nullable="false" identity="true" comment="Rule ID"/>
+        <column xsi:type="varchar" name="name" nullable="false" length="255" comment="Rule Name"/>
+        <column xsi:type="text" name="description" nullable="true" comment="Rule Description"/>
+        <column xsi:type="text" name="conditions_serialized" nullable="true" comment="Conditions Serialized"/>
+        <column xsi:type="boolean" name="is_active" nullable="false" default="1" comment="Is Active"/>
+        <column xsi:type="int" name="sort_order" padding="10" unsigned="true" nullable="true" default="0" comment="Sort Order"/>
+        <column xsi:type="text" name="store_ids" nullable="true" comment="Store IDs"/>
+        <column xsi:type="text" name="customer_group_ids" nullable="true" comment="Customer Group IDs"/>
+        <column xsi:type="text" name="restricted_method_ids" nullable="true" comment="Restricted Method IDs"/>
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP" comment="Creation Time"/>
+        <column xsi:type="timestamp" name="updated_at" on_update="true" nullable="false" default="CURRENT_TIMESTAMP" comment="Update Time"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="rule_id"/>
+        </constraint>
+        <index referenceId="RCUBED_SHIPPING_RULE_NAME" indexType="btree">
+            <column name="name"/>
+        </index>
+        <index referenceId="RCUBED_SHIPPING_RULE_IS_ACTIVE" indexType="btree">
+            <column name="is_active"/>
+        </index>
+    </table>
+</schema>

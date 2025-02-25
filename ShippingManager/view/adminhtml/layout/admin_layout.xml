@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Layout file to add CSS to all admin pages.
+ *
+ * @category   RCubed
+ * @package    RCubed_ShippingManager
+ * @author     R-Cubed Solutions <drussell@rcubedpro.com>
+ * @copyright  2025 R-Cubed Solutions (https://www.rcubedpro.com)
+ * @license    https://opensource.org/licenses/OSL-3.0 Open Software License 3.0 (OSL-3.0)
+ * @link       https://www.rcubedpro.com
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="RCubed_ShippingManager::css/styles.css"/>
+    </head>
+</page>
